@@ -1,0 +1,22 @@
+{
+    "https://saltire.lti.app/platform": [{
+        "default": true,
+        "client_id": "saltire.lti.app",
+        "auth_login_url": "https://saltire.lti.app/platform/auth",
+        "auth_token_url": "https://saltire.lti.app/platform/token/13768f7b4aeda3cb5065aeb519db4ba0",
+        "key_set_url": "https://saltire.lti.app/platform/jwks",
+        "key_set": {
+            "keys":[{
+                "kty": "RSA",
+                "n": "vDLCAdoC1lRCxkTOy_9pR25gfwBzuJbIqpun0yNx98lPKMMbRclpS1iLnwafjJjnG76Q1V0cQzZiXtKnLIQsllaOWtwxQ2gnFjOu53h-sNOQ1IQaVe8L0UBpeS6uaD2PipXog7iJC82sz7Cmy1h5A0GQ415kavXVf4Lddz4Dx1srvVPOLUHUnXNUFuB_UCaWl4-KkJiaCwx6Cibvqo4cIILsE9R-xhKxUGhk-Yu-0b8cP4OGqW-J75SRZHJQcp_3iGITk2cj0ZQFmpsZELxa-YfzviMvIMBssxNiHczc4DDhFZuE4Tp9ig_hzi56B6OkKXH-EsN2hf9OLW0RiIy_4w",
+                "e": "AQAB",
+                "alg": "RS256",
+                "use": "sig",
+                "kid": "ZlhR05D9ho"
+            }]
+        },
+        "private_key_file": ".\\private.pem",
+        "public_key_file": ".\\public.pem",
+        "deployment_ids": ["cLWwj9cbmkSrCNsckEFBmA"]
+    }]
+}

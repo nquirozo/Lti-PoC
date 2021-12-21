@@ -1,0 +1,131 @@
+<html>  
+    <body>
+        <input id="launch_id" type="hidden" value="{{ launch_id }}"
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in roles %}
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>{{ item }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<div>
+    <label for="scoreMax">Max Score</label>
+    <input type="text" id="scoreMax" name="scoreMax"/>
+    <label for="label">label</label>
+    <input type="text" id="label" name="label"/>
+    <label for="tag">Tag</label>
+    <input type="text" id="tag" name="tag"/>
+</div>
+        <table border="1">
+            <thead>
+                <th>status</th>
+                <th>user_id</th>
+                <th>name</th>
+                <th>roles</th>
+                <th>nota</th>
+            </thead>
+            <tbody>
+                {% for item in members %}
+                    <tr>
+                        <td>{{ item.status }}</td>
+                        <td>{{ item.user_id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.roles }}</td>
+                        <td>
+                            <input type="number" id="nota:{{item.user_id}}" >
+                        </td>
+                        <td>
+                            <button onclick="createLineItem('{{item.user_id}}')">Crear Nota</button>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+        <br/>
+        <button onclick="getNotas()">Cargar Notas</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>userId</th>
+                    <th>scoreOf</th>
+                    <th>resultMaximum</th>
+                    <th>resultScore</th>
+                </tr>
+            </thead>
+            <tbody id="notas">
+
+            </tbody>
+        </table>
+
+
+
+
+
+    <script>
+        const createLineItem = async (user_id) => {
+            let scoreMax = document.getElementById("scoreMax").value;
+            let label = document.getElementById("label").value;
+            let tag = document.getElementById("tag").value;
+            let launch_id = document.getElementById("launch_id").value;
+            let nota = document.getElementById(`nota:${user_id}`).value;
+
+            
+            let data = {
+                scoreMax: scoreMax,
+                label: label,
+                tag: tag,
+                launch_id: launch_id,
+                nota: nota,
+                user_id: user_id
+            };
+
+            let response = await fetch(`/lti/createLI`, {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            console.log(response);
+            let responsejson = await response.json();
+            console.log(responsejson);
+        }
+
+
+
+        const getNotas = async () => {
+            let launch_id = document.getElementById("launch_id").value;
+            let tag = document.getElementById("tag").value;
+            let req = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+
+            let response = await fetch(`notas?launch_id=${launch_id}&tag=${tag}`, req);
+            let json = await response.json();
+            document.getElementById("notas").innerHTML = "";
+            json.forEach(item => {
+                document.getElementById("notas").innerHTML += 
+                    `<tr>
+                        <td>${item.userId}</td>
+                        <td>${item.scoreOf}</td>
+                        <td>${item.resultMaximum}</td>
+                        <td>${item.resultScore}</td>
+                    </tr>`;
+            });
+        }
+    </script>
+    </body>
+</html>

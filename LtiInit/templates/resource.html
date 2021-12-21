@@ -1,0 +1,21 @@
+<html>  
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in roles %}
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>{{ item }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+    <h1>Este es un resource link.</h1>
+</html>
